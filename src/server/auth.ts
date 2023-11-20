@@ -150,6 +150,28 @@ const extendedPrismaAdapter: Adapter = {
 
     await processMembershipInvitations(user.email, user.id);
 
+    // addon: default project access
+    const defaultProjectID = env.T_LANGFUSE_DEFAULT_PROJECT_ID
+      ? (
+          await prisma.project.findUnique({
+            where: {
+              id: env.T_LANGFUSE_DEFAULT_PROJECT_ID,
+            },
+          })
+        )?.id
+      : undefined;
+    if (defaultProjectID !== undefined) {
+      await prisma.membership.create({
+        data: {
+          projectId: defaultProjectID,
+          userId: user.id,
+          role: "VIEWER",
+        },
+      });
+    }
+    console.log("addon: default project access",
+      { defaultProjectID, user: { id: user.id, email: user.email } });
+
     return user;
   },
 };

@@ -33,6 +33,8 @@ export const env = createEnv({
       required_error:
         "A strong Salt is required to encrypt API keys securely. See: https://langfuse.com/docs/deployment/self-host#deploy-the-container",
     }),
+    // addon
+    T_LANGFUSE_DEFAULT_PROJECT_ID: z.string().optional(),
     // AUTH
     AUTH_GOOGLE_CLIENT_ID: z.string().optional(),
     AUTH_GOOGLE_CLIENT_SECRET: z.string().optional(),
@@ -80,6 +82,8 @@ export const env = createEnv({
     LANGFUSE_NEW_USER_SIGNUP_WEBHOOK:
       process.env.LANGFUSE_NEW_USER_SIGNUP_WEBHOOK,
     SALT: process.env.SALT,
+    // addon
+    T_LANGFUSE_DEFAULT_PROJECT_ID: process.env.T_LANGFUSE_DEFAULT_PROJECT_ID,
     // AUTH
     AUTH_GOOGLE_CLIENT_ID: process.env.AUTH_GOOGLE_CLIENT_ID,
     AUTH_GOOGLE_CLIENT_SECRET: process.env.AUTH_GOOGLE_CLIENT_SECRET,
